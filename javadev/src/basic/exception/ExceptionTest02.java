@@ -10,7 +10,7 @@ public class ExceptionTest02 {
 			System.out.println("종료");
 	}
 
-	private static void throwException() throws Exception {  //thros Exception 나를 호출한 쪽에서 예외처리
+	private static void throwException() throws Exception {  //throws Exception 나를 호출한 쪽에서 예외처리
 	
 			String str = null;
 			System.out.println(str.toString());

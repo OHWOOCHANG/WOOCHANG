@@ -50,35 +50,36 @@
 <link rel="shortcut icon" href="/favicon.ico" />
 </head>
 <body>
+<form action="update_action.jsp" method="post">
 <table>
-	<caption>게시물 상세보기</caption>
+	<caption>게시물 수정</caption>
 <tr>
 	<th>글번호</th>
-	<td><%=boardVO.getNo() %></td>
+	<td><%=boardVO.getNo() %>
+	<input type="hidden" name="no" value="<%=boardVO.getNo() %>"/> </td>
 </tr>
 <tr>
 	<th>작성자</th>
-	<td><%=boardVO.getName() %></td>
+	<td><input type="text" name="name"  value="<%=boardVO.getName() %>"/></td>
 </tr>
 <tr>
 	<th>제목</th>
-	<td><%=boardVO.getTitle() %></td>
+	<td><input type="text" name="title" value="<%=boardVO.getTitle() %>"/></td>
 </tr>
 <tr>
 	<th>내용</th>
-	<td><%=boardVO.getContent() %></td>
+	<td><textarea cols="40" rows="5" name="content"><%=boardVO.getContent() %></textarea></td>
 </tr>
 <tr>
-	<th>날짜</th>
-	<td><%=boardVO.getRegdate() %></td>
+	<th>비밀번호</th>
+	<td><input type="password" name="pwd" />
+		<div style="color:red">
+		* 처음 글 등록시 입력했던 비밀번호를 재 입력하세요
+		</div>
+	</td>
 </tr>
-<tr>
-	<th>조회수</th>
-	<td><%=boardVO.getViewcount() %></td>
-</tr>
-</table><br/>
-<a href="list.jsp">리스트</a>
-<a href="update.jsp?no=<%=boardVO.getNo() %> ">수정</a>
-<a href="delete.jsp?no=<%=boardVO.getNo() %> ">삭제</a>
+</table>
+<input type="submit" value="완료" />
+</form>
 </body>
 </html>

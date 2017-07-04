@@ -1,3 +1,4 @@
+<%@page import="board.model.BoardDAO"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
@@ -16,30 +17,9 @@
 	boardVO.setPwd(pwd);
 	boardVO.setTitle(title);
 	
-	Connection cn = null;
-	PreparedStatement ps = null;
-	
-	boolean result = false;
-	StringBuffer sql = new StringBuffer();
-	sql.append(" INSERT INTO tb_board(no, title, name, content, pwd)");
-	sql.append(" VALUES(seq_board.nextval, ?, ?, ?, ?)");
-	
-	try {
-		Class.forName("oracle.jdbc.OracleDriver");
-		cn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "bigdata", "bigdata");
-		ps = cn.prepareStatement(sql.toString());
-		ps.setString(1, boardVO.getTitle());
-		ps.setString(2, boardVO.getName());
-		ps.setString(3, boardVO.getContent());
-		ps.setString(4, boardVO.getPwd());
-		ps.executeUpdate();
-		result = true;
-	} catch(Exception e) {
-		e.printStackTrace();
-	} finally {
-		if (ps != null) try{ps.close();}catch(Exception e){}
-		if (cn != null) try{cn.close();}catch(Exception e){}
-	}
+	BoardDAO boardDAO = BoardDAO.getInstance();
+	boolean result = boardDAO.insertBoard(boardVO);
+			
 	
 %>
 <!DOCTYPE html>

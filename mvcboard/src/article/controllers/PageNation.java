@@ -18,8 +18,8 @@ public class PageNation {
 	long startPage = 0; // 페이지 블럭 시작페이지
 	long endPage = 0;   // 페이지 블럭 끝페이지
 	
-	long startnum = 0;
-	long endnum = 0;
+	private long startnum = 0;
+	private long endnum = 0;
 	private StringBuffer display = new StringBuffer();
 	
 	public PageNation(long pg) throws Exception {
@@ -35,24 +35,26 @@ public class PageNation {
 			pageCount++;
 		}
 		if (pageCount < endPage) endPage = pageCount;
-		
+
+		display.append("<ul class='pagination'>");
 		if (startPage == 1) {
-			display.append(" [이전블럭] ");
+			display.append("<li><a>[이전블럭]</a></li>");
 		} else {
-			display.append(" <a href='list?pg=" + (startPage - 1) + "'>[이전블럭]</a> ");
+			display.append("<li><a href='list?pg=" + (startPage - 1) + "'>[이전블럭]</a></li>");
 		}
 		for(long p = startPage; p <= endPage; p++) {
 			if (p == pg) {
-				display.append(" " + p + " ");
+				display.append("<li class=\"active\"><a>" + p + "</a></li>");
 			} else {
-				display.append("<a href='list?pg="+ pg + "'>" + p + "</a> ");
+				display.append("<li><a href='list?pg="+ p + "'>" + p + "</a></li>");
 			}
 		}
 		if (endPage == pageCount) {
-			display.append(" [다음블럭] ");
+			display.append("<li><a>[다음블럭]</a></li>");
 		} else {
-			display.append(" <a href='list?pg=" + (endPage + 1) + "'>[다음블럭]</a> ");
+			display.append("<li><a href='list?pg=" + (endPage + 1) + "'>[다음블럭]</a></li>");
 		}
+		display.append("</ul>");
 	}
 
 	public long getPg() {

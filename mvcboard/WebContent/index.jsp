@@ -11,6 +11,7 @@
 <ol>
 	<li><a href="article/list">게시판</a></li>
 	<li><a href="watson/text2speech">watson, text to speech</a></li>
+	<li><a href="member/regit">회원가입</a></li>
 </ol>
 </body>
 </html>

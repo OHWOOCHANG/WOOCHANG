@@ -11,7 +11,10 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.ibatis.sqlmap.client.SqlMapClient;
+
 import article.controllers.PageNation;
+import ibatis.QueryHandler;
 
 public class ArticleDAOImpl implements ArticleDAO {
 	private static ArticleDAOImpl articleDAO = null;
@@ -71,7 +74,10 @@ public class ArticleDAOImpl implements ArticleDAO {
 
 	@Override
 	public void insertArticle(ArticleVO articleVO) throws Exception {
-		Connection cn = null;
+		SqlMapClient sqlMap = QueryHandler.getInstance();
+		sqlMap.insert("article.insertArticle", articleVO); 
+		
+		/*Connection cn = null;
 		PreparedStatement ps = null;
 		
 		StringBuffer sql = new StringBuffer();
@@ -89,7 +95,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 			ps.executeUpdate();
 		} finally {
 			dbClose(ps, cn);
-		}
+		}*/
 	}
 	
 	@Override
@@ -161,7 +167,10 @@ public class ArticleDAOImpl implements ArticleDAO {
 	
 	@Override
 	public ArticleVO getDetail(long no) throws Exception {
-		ArticleVO articleVO = null;
+		SqlMapClient sqlMap = QueryHandler.getInstance();
+		return (ArticleVO) sqlMap.queryForObject("article.getDetail", no);
+		
+		/*ArticleVO articleVO = null;
 		
 		Connection cn =null;
 		PreparedStatement ps = null;
@@ -191,12 +200,15 @@ public class ArticleDAOImpl implements ArticleDAO {
 		} finally {
 			dbClose(rs, ps, cn);
 		}
-		return articleVO;
+		return articleVO;*/
 	}
 	
 	@Override
 	public void updateViewcount(long no) throws Exception {
-		Connection cn = null;
+		SqlMapClient sqlMap = QueryHandler.getInstance();
+		sqlMap.update("article.updateViewcount", no);
+		
+		/*Connection cn = null;
 		PreparedStatement ps = null;
 		
 		StringBuffer sql = new StringBuffer();
@@ -213,7 +225,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 			}
 		} finally {
 			dbClose(ps, cn);
-		}
+		}*/
 	}
 	@Override
 	public void updateArticle(ArticleVO articleVO) throws Exception {
